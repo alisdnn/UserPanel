@@ -1,2 +1,5 @@
+rootProject.name = 'UserPanel'
 include ':app'
-rootProject.name = "UserPanel"
+include ':domain'
+include ':data'
+include ':presentation'
