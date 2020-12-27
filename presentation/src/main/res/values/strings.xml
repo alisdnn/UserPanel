@@ -3,4 +3,10 @@
     <string name="something_went_wrong">Something went wrong</string>
     <string name="description">Description:\n\n %1$s</string>
     <string name="abv">ABV: %1$s</string>
+    <string name="text_view_password">Password</string>
+    <string name="text_view_username">Username:</string>
+    <string name="text_input_edit_text_username">Username</string>
+    <string name="text_input_edit_text_password">Password</string>
+    <string name="button_login">Login</string>
+    <string name="button_signup">Signup</string>
 </resources>
