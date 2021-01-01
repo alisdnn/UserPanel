@@ -120,7 +120,7 @@
         android:layout_marginStart="8dp"
         app:layout_constraintStart_toEndOf="@+id/textView"
         app:layout_constraintTop_toBottomOf="@+id/textViewSignupError"
-        app:srcCompat="@drawable/ic_baseline_image_24"
+        app:srcCompat="@drawable/ic_image_24"
         android:contentDescription="@string/signup_image_button_description" />
 
 
