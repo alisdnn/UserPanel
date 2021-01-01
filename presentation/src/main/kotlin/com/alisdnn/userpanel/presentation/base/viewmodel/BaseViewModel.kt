@@ -9,11 +9,13 @@ import com.alisdnn.userpanel.domain.base.Failure
 import com.alisdnn.userpanel.presentation.R
 import com.uber.autodispose.AutoDispose
 import com.uber.autodispose.FlowableSubscribeProxy
+import com.uber.autodispose.SingleSubscribeProxy
 import com.uber.autodispose.lifecycle.CorrespondingEventsFunction
 import com.uber.autodispose.lifecycle.LifecycleEndedException
 import com.uber.autodispose.lifecycle.LifecycleScopeProvider
 import io.reactivex.Flowable
 import io.reactivex.Observable
+import io.reactivex.Single
 import io.reactivex.annotations.CheckReturnValue
 import io.reactivex.subjects.BehaviorSubject
 import javax.inject.Inject
@@ -61,6 +63,11 @@ open class BaseViewModel @ViewModelInject constructor() : ViewModel(),
 
     @CheckReturnValue
     fun <T> Flowable<T>.autoDisposable(): FlowableSubscribeProxy<T> =
+        this.`as`(AutoDispose.autoDisposable(this@BaseViewModel))
+
+
+    @CheckReturnValue
+    fun <T> Single<T>.autoDisposable(): SingleSubscribeProxy<T> =
         this.`as`(AutoDispose.autoDisposable(this@BaseViewModel))
 
 
