@@ -81,6 +81,8 @@ dependencies {
     implementation(Depends.Libraries.logging_interceptor)
     debugImplementation(Depends.Libraries.chucker)
     releaseImplementation(Depends.Libraries.chucker_no_op)
+    //reactive
+    implementation(Depends.Libraries.rx_java_android)
     //other
     implementation(Depends.Libraries.timber)
     implementation(Depends.Libraries.material)

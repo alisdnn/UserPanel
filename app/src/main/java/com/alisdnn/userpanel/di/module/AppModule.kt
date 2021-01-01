@@ -3,6 +3,8 @@ package com.alisdnn.userpanel.di.module
 import android.app.Application
 import android.content.Context
 import android.content.res.Resources
+import androidx.room.Room
+import com.alisdnn.userpanel.data.db.base.UserDatabase
 import com.alisdnn.userpanel.data.network.BaseHttpClient
 import com.alisdnn.userpanel.data.network.BaseRetrofit
 import com.alisdnn.userpanel.domain.extension.allowWrites
@@ -39,6 +41,16 @@ class AppModule {
     @Singleton
     fun retrofit(baseRetrofit: BaseRetrofit): Retrofit = baseRetrofit.retrofit
 
+    @Singleton
+    @Provides
+    fun provideUserDatabase(
+        @ApplicationContext context: Context
+    ) = Room.databaseBuilder(
+        context,
+        UserDatabase::class.java,
+        UserDatabase.DATABASE_NAME
+    ).build()
+
     @Provides
     @Singleton
     fun chuckerCollector(@ApplicationContext appContext: Context): ChuckerCollector =
@@ -49,5 +61,8 @@ class AppModule {
                 retentionPeriod = RetentionManager.Period.ONE_HOUR
             )
         }
+
+
+
 
 }
