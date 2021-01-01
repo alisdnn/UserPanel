@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.alisdnn.userpanel.presentation.R
 import com.alisdnn.userpanel.presentation.databinding.FragmentLoginBinding
 import com.alisdnn.userpanel.presentation.extension.observe
@@ -60,7 +61,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
 
 
     private fun navigateToSignUpFragment() {
-
+        findNavController().navigate(R.id.action_loginFragment_to_signupFragment)
     }
 
     private fun formValidation() {
