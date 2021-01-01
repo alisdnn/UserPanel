@@ -4,6 +4,8 @@ import com.alisdnn.userpanel.data.db.base.UserDatabase
 import com.alisdnn.userpanel.data.db.dao.UserDao
 import com.alisdnn.userpanel.data.user.datasource.UserDataSource
 import com.alisdnn.userpanel.data.user.datasource.UserDataSourceImpl
+import com.alisdnn.userpanel.data.user.repository.UserRepositoryImpl
+import com.alisdnn.userpanel.domain.user.repository.UserRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -13,6 +15,16 @@ import javax.inject.Singleton
 @InstallIn(ApplicationComponent::class)
 @Module
 class RepositoryModule {
+
+    @Singleton
+    @Provides
+    fun provideUserRepository(
+        userDataSource: UserDataSource
+    ): UserRepository {
+        return UserRepositoryImpl(
+            userDataSource = userDataSource
+        )
+    }
 
     @Singleton
     @Provides
