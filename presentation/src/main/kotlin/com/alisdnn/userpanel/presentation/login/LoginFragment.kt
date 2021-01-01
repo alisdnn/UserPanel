@@ -1,13 +1,13 @@
-package com.alisdnn.userpanel.presentation.user.login
+package com.alisdnn.userpanel.presentation.login
 
 import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import com.alisdnn.userpanel.presentation.R
 import com.alisdnn.userpanel.presentation.databinding.FragmentLoginBinding
+import com.alisdnn.userpanel.presentation.extension.observe
 import com.alisdnn.userpanel.presentation.extension.viewBinding
 import com.google.android.material.transition.platform.MaterialArcMotion
 import com.google.android.material.transition.platform.MaterialContainerTransform
@@ -23,6 +23,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupUI()
+        setupViewModel()
     }
 
     private fun setupUI() {
@@ -37,9 +38,29 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         }
     }
 
+    private fun setupViewModel() {
+        viewModel.run {
+
+            observe(isUserValid, ::checkUserValidity)
+
+        }
+    }
+
+    private fun checkUserValidity(isUserValid: Boolean) {
+        if (isUserValid)
+            navigateToAdminFragment()
+        else {
+            binding.textViewLoginError.text = getString(R.string.no_user_found_with_this_email)
+        }
+    }
+
+    private fun navigateToAdminFragment() {
+
+    }
+
+
     private fun navigateToSignUpFragment() {
-        val action = LoginFragmentDirections.navigateToSignupFragment()
-        findNavController().navigate(action)
+
     }
 
     private fun formValidation() {
@@ -50,6 +71,8 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
 
         usernameTextInputLayout.error = ""
         passwordTextInputLayout.error = ""
+        binding.textViewLoginError.text = ""
+
         var isFormValid = true
 
         if (username.isEmpty()) {
