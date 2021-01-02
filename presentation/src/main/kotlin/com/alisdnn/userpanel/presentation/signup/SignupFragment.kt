@@ -16,7 +16,7 @@ class SignupFragment : Fragment(R.layout.fragment_signup) {
 
     private val binding by viewBinding(FragmentSignupBinding::bind)
 
-    private val viewModel: LoginViewModel by viewModels()
+    private val viewModel: SignupViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
