@@ -13,6 +13,6 @@ interface UserDao : BaseDao<UserData> {
     @Query("SELECT * FROM user WHERE username = :username")
     fun select(username: String): Single<UserData>
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     override fun insert(t: UserData): Single<Long>
 }
