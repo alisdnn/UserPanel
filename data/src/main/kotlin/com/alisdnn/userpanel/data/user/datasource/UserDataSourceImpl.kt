@@ -1,6 +1,7 @@
 package com.alisdnn.userpanel.data.user.datasource
 
 import com.alisdnn.userpanel.data.db.dao.UserDao
+import com.alisdnn.userpanel.data.mapper.map
 import com.alisdnn.userpanel.domain.user.entity.User
 import io.reactivex.Single
 import javax.inject.Inject
@@ -15,6 +16,12 @@ class UserDataSourceImpl @Inject constructor(
         return userDao.select(username).map {
             it.toDomain()
         }
+    }
+
+    override fun insertUser(user: User): Single<Long> {
+        return userDao.insert(
+            user.map()
+        )
     }
 
 
