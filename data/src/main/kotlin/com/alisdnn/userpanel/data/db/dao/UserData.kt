@@ -16,23 +16,23 @@ data class UserData(
     @ColumnInfo(name = "username")
     val username: String,
 
-    @ColumnInfo(name = "email")
-    val email: String,
+    @ColumnInfo(name = "fullname")
+    val fullname: String,
 
     @ColumnInfo(name = "isAdmin")
     val isAdmin: Boolean,
 
-    @ColumnInfo(name = "passwordHash")
-    val passwordHash: String
+    @ColumnInfo(name = "password")
+    val password: String
 
 ) : ResponseObject<User> {
     override fun toDomain(): User =
         User(
             id = id,
             username = username,
-            email = email,
+            fullname = fullname,
             isAdmin = isAdmin,
-            passwordHash = passwordHash
+            password = password
         )
 
 }
