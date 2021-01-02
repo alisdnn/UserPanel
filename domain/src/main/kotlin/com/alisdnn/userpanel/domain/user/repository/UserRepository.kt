@@ -7,4 +7,6 @@ interface UserRepository {
 
     fun getUser(username: String): Single<User>
 
+    fun insertUser(user: User): Single<Long>
+
 }

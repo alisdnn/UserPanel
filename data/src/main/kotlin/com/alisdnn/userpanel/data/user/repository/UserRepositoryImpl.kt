@@ -16,10 +16,18 @@ class UserRepositoryImpl @Inject constructor(
     override fun getUser(username: String): Single<User> {
         val data = userDataSource.selectUser(username)
         return data.applyIoScheduler()
-            .doOnError { e->
+            .doOnError { e ->
                 println(e.message)
             }
 
+    }
+
+    override fun insertUser(user: User): Single<Long> {
+        val data = userDataSource.insertUser(user)
+        return data.applyIoScheduler()
+            .doOnError {
+                println(it.message)
+            }
     }
 
 }

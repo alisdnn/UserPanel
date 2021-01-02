@@ -1,27 +1,24 @@
-package com.alisdnn.userpanel.presentation.login
+package com.alisdnn.userpanel.presentation.signup
 
-import android.graphics.Color
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import com.alisdnn.userpanel.presentation.R
+import com.alisdnn.userpanel.presentation.databinding.FragmentSignupBinding
+import com.alisdnn.userpanel.presentation.extension.viewBinding
 import com.alisdnn.userpanel.presentation.base.util.isValidEmail
 import com.alisdnn.userpanel.presentation.base.util.isValidPassword
-import com.alisdnn.userpanel.presentation.databinding.FragmentLoginBinding
 import com.alisdnn.userpanel.presentation.extension.observe
-import com.alisdnn.userpanel.presentation.extension.viewBinding
-import com.google.android.material.transition.platform.MaterialArcMotion
-import com.google.android.material.transition.platform.MaterialContainerTransform
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class LoginFragment : Fragment(R.layout.fragment_login) {
+class SignupFragment : Fragment(R.layout.fragment_signup) {
 
-    private val binding by viewBinding(FragmentLoginBinding::bind)
+    private val binding by viewBinding(FragmentSignupBinding::bind)
 
-    private val viewModel: LoginViewModel by viewModels()
+    private val viewModel: SignupViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -30,53 +27,58 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
     }
 
     private fun setupUI() {
-        activity?.title = "Login"
-        setSharedElementTransitionOnEnter()
+        activity?.title = "Signup"
 
-        binding.buttonLogin.setOnClickListener {
-            formValidation()
-        }
         binding.buttonSignup.setOnClickListener {
-            navigateToSignUpFragment()
+            formValidation()
         }
     }
 
     private fun setupViewModel() {
         viewModel.run {
 
-            observe(isUserValid, ::checkUserValidity)
+            observe(isUserAdmin,::checkSignupProcess)
 
         }
     }
 
-    private fun checkUserValidity(isUserValid: Boolean) {
-        if (isUserValid)
+    private fun checkSignupProcess(isUserAdmin: Boolean) {
+        if(isUserAdmin)
             navigateToAdminFragment()
-        else {
-            binding.textViewLoginError.text = getString(R.string.no_user_found_with_this_email)
-        }
+        else
+            navigateToProfileFragment()
+    }
+
+    private fun navigateToProfileFragment() {
+
     }
 
     private fun navigateToAdminFragment() {
 
     }
 
-
-    private fun navigateToSignUpFragment() {
-        findNavController().navigate(R.id.action_loginFragment_to_signupFragment)
-    }
-
     private fun formValidation() {
+        val fullname = binding.tietFullname.text.toString().trim()
+        val fullnameTextInputLayout = binding.tilFullname
         val username = binding.tietUsername.text.toString().trim()
         val usernameTextInputLayout = binding.tilUsername
         val password = binding.tietPassword.text.toString().trim()
         val passwordTextInputLayout = binding.tilPassword
+        val confirmPassword = binding.tietConfirmPassword.text.toString().trim()
+        val confirmPasswordTextInputLayout = binding.tilConfirmPassword
 
+        fullnameTextInputLayout.error = ""
         usernameTextInputLayout.error = ""
         passwordTextInputLayout.error = ""
-        binding.textViewLoginError.text = ""
+        confirmPasswordTextInputLayout.error = ""
+        binding.textViewSignupError.text = ""
 
         var isFormValid = true
+
+        if (fullname.isEmpty()) {
+            isFormValid = false
+            fullnameTextInputLayout.error = "Please enter a name"
+        }
 
         if (username.isEmpty()) {
             isFormValid = false
@@ -94,20 +96,19 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
             passwordTextInputLayout.error =
                 "Password field must contain numerical and capital values"
         }
-        if (isFormValid)
-            viewModel.checkUserValidity(username, password)
 
-    }
-
-    private fun setSharedElementTransitionOnEnter() {
-        sharedElementEnterTransition = MaterialContainerTransform().apply {
-            duration = 400L
-            isElevationShadowEnabled = true
-            pathMotion = MaterialArcMotion()
-            startElevation = 9f
-            endElevation = 9f
-            scrimColor = Color.TRANSPARENT
+        if (confirmPassword.isEmpty()) {
+            isFormValid = false
+            confirmPasswordTextInputLayout.error = "Please enter password confirmation"
+        } else if (password != confirmPassword) {
+            isFormValid = false
+            confirmPasswordTextInputLayout.error =
+                "Confirm password field is not equal to password"
         }
-    }
 
+
+        if (isFormValid)
+            viewModel.signupUser(username, fullname, password)
+
+    }
 }

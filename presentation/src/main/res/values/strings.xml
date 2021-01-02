@@ -5,9 +5,15 @@
     <string name="abv">ABV: %1$s</string>
     <string name="text_view_password">Password</string>
     <string name="text_view_username">Username:</string>
-    <string name="text_input_edit_text_username">Username</string>
-    <string name="text_input_edit_text_password">Password</string>
+    <string name="text_username">Username</string>
+    <string name="text_password">Password</string>
     <string name="button_login">Login</string>
     <string name="button_signup">Signup</string>
     <string name="no_user_found_with_this_email">No User Found With this email.</string>
+    <string name="signup_edit_text_fullname">Full Name</string>
+    <string name="signup_edit_text_email_username">Email/Username</string>
+    <string name="text_image">Image:</string>
+    <string name="signup_image_button_description">Choose an image for your profile.</string>
+    <string name="signup_edit_text_password">Password</string>
+    <string name="signup_edit_text_confirm_password">Confirm Password</string>
 </resources>

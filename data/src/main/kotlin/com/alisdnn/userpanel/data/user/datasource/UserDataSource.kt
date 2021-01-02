@@ -7,4 +7,5 @@ interface UserDataSource {
 
     fun selectUser(username:String): Single<User>
 
+    fun insertUser(user: User):Single<Long>
 }

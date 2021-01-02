@@ -10,7 +10,7 @@ import io.reactivex.Single
 interface BaseDao<T : Any> {
 
     @Insert(onConflict = IGNORE)
-    fun insert(t: T): Long
+    fun insert(t: T): Single<Long>
 
     @Insert(onConflict = REPLACE)
     fun insert(ts: List<T>)

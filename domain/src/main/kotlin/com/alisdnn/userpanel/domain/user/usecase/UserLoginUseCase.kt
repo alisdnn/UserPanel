@@ -25,7 +25,7 @@ class UserLoginUseCase @Inject constructor(
 
         enteredUsername?.let {
             userRepository.getUser(it).map { user ->
-                if (user.passwordHash == enteredPassword)
+                if (user.password == enteredPassword)
                     return@map Single.just(true)
                 else {
                     return@map Single.just(false)

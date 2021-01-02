@@ -1,4 +1,4 @@
-package com.alisdnn.userpanel.presentation.login
+package com.alisdnn.userpanel.presentation.base.util
 
 import java.util.regex.Matcher
 import java.util.regex.Pattern
