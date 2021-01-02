@@ -7,7 +7,7 @@ import com.alisdnn.userpanel.data.base.ResponseObject
 import com.alisdnn.userpanel.domain.user.entity.User
 
 @Entity(tableName = "user")
-data class UserEntity(
+data class UserData(
 
     @ColumnInfo(name = "userId")
     @PrimaryKey(autoGenerate = true)
