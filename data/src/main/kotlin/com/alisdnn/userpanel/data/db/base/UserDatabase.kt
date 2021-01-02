@@ -5,10 +5,10 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.alisdnn.userpanel.data.db.Constants.USER_DATABASE_NAME
 import com.alisdnn.userpanel.data.db.dao.UserDao
-import com.alisdnn.userpanel.data.db.dao.UserEntity
+import com.alisdnn.userpanel.data.db.dao.UserData
 
 @Database(
-    entities = [UserEntity::class],
+    entities = [UserData::class],
     version = 1,
     exportSchema = false
 )
