@@ -120,10 +120,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
+        android:contentDescription="@string/signup_image_button_description"
+        app:layout_constraintBottom_toBottomOf="@+id/textView"
         app:layout_constraintStart_toEndOf="@+id/textView"
-        app:layout_constraintTop_toBottomOf="@+id/textViewSignupError"
-        app:srcCompat="@drawable/ic_image_24"
-        android:contentDescription="@string/signup_image_button_description" />
+        app:layout_constraintTop_toTopOf="@+id/textView"
+        app:srcCompat="@drawable/ic_image_24" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="textView,imageButton"
+        tools:layout_editor_absoluteY="32dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
