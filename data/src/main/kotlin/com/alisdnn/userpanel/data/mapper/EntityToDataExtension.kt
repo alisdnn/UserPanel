@@ -6,7 +6,7 @@ import com.alisdnn.userpanel.domain.user.entity.User
 fun User.map() = UserData(
     id = id,
     username = username,
-    email = email,
+    fullname = fullname,
     isAdmin = isAdmin,
-    passwordHash = passwordHash
+    password = password
 )
