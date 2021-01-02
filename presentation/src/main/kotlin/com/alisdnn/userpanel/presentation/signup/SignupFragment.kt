@@ -2,6 +2,7 @@ package com.alisdnn.userpanel.presentation.signup
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.alisdnn.userpanel.presentation.R
@@ -9,6 +10,7 @@ import com.alisdnn.userpanel.presentation.databinding.FragmentSignupBinding
 import com.alisdnn.userpanel.presentation.extension.viewBinding
 import com.alisdnn.userpanel.presentation.base.util.isValidEmail
 import com.alisdnn.userpanel.presentation.base.util.isValidPassword
+import com.alisdnn.userpanel.presentation.extension.observe
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -33,6 +35,25 @@ class SignupFragment : Fragment(R.layout.fragment_signup) {
     }
 
     private fun setupViewModel() {
+        viewModel.run {
+
+            observe(isUserAdmin,::checkSignupProcess)
+
+        }
+    }
+
+    private fun checkSignupProcess(isUserAdmin: Boolean) {
+        if(isUserAdmin)
+            navigateToAdminFragment()
+        else
+            navigateToProfileFragment()
+    }
+
+    private fun navigateToProfileFragment() {
+
+    }
+
+    private fun navigateToAdminFragment() {
 
     }
 
